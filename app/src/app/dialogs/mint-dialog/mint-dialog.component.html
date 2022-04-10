@@ -1,0 +1,21 @@
+<div class="w-96">
+    <div class="flex items-start justify-between mb-2">
+        <div class="text-xl">Mint</div>
+        <div mat-dialog-close class="flex items-center justify-center w-8 h-8 cursor-pointer text-center">
+            <i class="material-icons w-8 h-8">close</i>
+        </div>
+    </div>
+
+    <div class="flex flex-col items-center justify-center">
+        <div class="border-4 border-green-500 rounded-full p-4 w-24 h-24">
+            <i class="material-icons text-green-500 text-6xl">thumb_up</i>
+        </div>
+        <div class="text-left mt-6 w-full">
+            <div class="mb-1">Congratulation!</div>
+            <div class="mb-1">Your NFT has been minted successfully.</div>
+            <div class="my-2">
+                <a class="text-sm underline" target="_blank" [href]="txUrl">View Transaction</a>
+            </div>
+        </div>
+    </div>
+</div>

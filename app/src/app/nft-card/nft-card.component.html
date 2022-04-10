@@ -1,0 +1,17 @@
+<div class="w-full h-full p-3 border rounded-md shadow-md hover:border-slate-700 hover:cursor-pointer" *ngIf="metadata">
+    <img [src]="metadata.image" class="h-40 w-full mb-1" />
+    <div class="text-left  mb-1">{{ metadata.name }}</div>
+    <div class="flex justify-between">
+        <div class="text-sm">{{shortAddress(address)}}</div>
+        <div class="text-sm">#{{tokenId}}</div>
+    </div>
+</div>
+
+<div class="w-full h-full p-3 border rounded-md shadow-md animate-pulse flex flex-col gap-3" *ngIf="!metadata">
+    <div  class="bg-slate-200 h-40 w-40" ></div>
+    <div class="bg-slate-200 h-4"></div>
+    <div class="grid grid-cols-3 gap-4">
+        <div class="h-2 bg-slate-200 rounded col-span-2"></div>
+        <div class="h-2 bg-slate-200 rounded col-span-1"></div>
+      </div>
+</div>

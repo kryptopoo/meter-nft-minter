@@ -1,0 +1,112 @@
+<div class="h-40 flex justify-center bg-sky-600">
+    <div class="w-2/3 text-white my-4">
+        <div class="text-4xl">NFT Bridge</div>
+        <div class="text-xs opacity-60">A trustless two-way transaction channel between Meter and Ethereum </div>
+    </div>
+</div>
+<div class="flex justify-center relative -top-16">
+    <div class="w-2/3">
+        <div class="w-2/3">
+            <div
+                class="h-16 bg-slate-50 border-t-1 border-l-1 border-r-1 rounded-t-2xl flex items-center justify-between">
+                <div class="px-4 text-xl font-medium">Transfer Token</div>
+
+                <div class="w-64 flex items-center justify-between  gap-2 mr-6">
+                    <div class="bg-slate-50 text-black w-1/2 h-10 rounded cursor-pointer flex items-center justify-center"
+                        [class.active-button]="ercType == 'ERC1155'" (click)="ercType = 'ERC1155'">ERC1155</div>
+                    <div class="bg-slate-50 text-black w-1/2 h-10 rounded cursor-pointer flex items-center justify-center"
+                        [class.active-button]="ercType == 'ERC721'" (click)="ercType = 'ERC721'">ERC721</div>
+                </div>
+            </div>
+            <div
+                class="border-b-1 border-l-1 border-r-1 rounded-b-2xl shadow-md py-3 px-6 flex flex-col gap-6 min-h-[30rem]">
+                <div class="w-full flex items-center justify-between border-b border-b-neutral-100 pb-4">
+                    <div class="h-10 w-48 cursor-pointer" [class.text-2xl]="ethToMtr" (click)="ethToMtr = !ethToMtr">
+                        ETH to MTR
+                    </div>
+                    <div>
+                        <button><i
+                                class="material-icons text-3xl h-10 w-10 pt-[0.15rem] rounded-full bg-slate-200 text-slate-800"
+                                (click)="ethToMtr = !ethToMtr">swap_horiz</i></button>
+                    </div>
+                    <div class="h-10 w-48 cursor-pointer text-right" [class.text-2xl]="!ethToMtr"
+                        (click)="ethToMtr = !ethToMtr">
+                        MTR to ETH
+                    </div>
+                </div>
+
+                <div class="bg-orange-100 border border-orange-200 rounded px-8 py-4 text-sm">
+                    <div class="mb-2 font-medium ">Message</div>
+                    <div class="" *ngIf="ethToMtr">
+                        To access the ETH to MTR bridge you need to <a
+                            class="font-medium hover:cursor-pointer underline" (click)="changeNetwork(83)">switch to
+                            Ropsten Testnet Network</a>
+                    </div>
+                    <div class="" *ngIf="!ethToMtr">
+                        To access the MTR to ETH bridge you need to <a
+                            class="font-medium hover:cursor-pointer underline" (click)="changeNetwork(3)">switch to
+                            Meter Testnet Network</a>
+                    </div>
+                </div>
+
+                <div *ngIf="ethToMtr">
+                    <div class="flex justify-between gap-3">
+                        <div class="w-3/4 mb-4">
+                            <div class="">
+                                <div class="text-sky-600">Token Address (ETH)</div>
+                                <mat-form-field appearance="outline" class="w-full mb-2">
+                                    <input matInput required [(ngModel)]="ethToMtrData.tokenAddress" />
+                                </mat-form-field>
+                            </div>
+                            <div class="">
+                                <div class="text-sky-600">Receiver Address (MTR)</div>
+                                <mat-form-field appearance="outline" class="w-full mb-2">
+                                    <input matInput required [(ngModel)]="ethToMtrData.receiverAddress" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="w-1/4 mb-4">
+                            <div class="">
+                                <div class="text-sky-600">Token ID</div>
+                                <mat-form-field appearance="outline" class="w-full mb-2">
+                                    <input matInput required [(ngModel)]="ethToMtrData.tokenId" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <button mat-flat-button class="w-32 h-12 btn-primary-filled" (click)="approve()"
+                            [disabled]="!ethToMtrData.tokenAddress || !ethToMtrData.receiverAddress || !ethToMtrData.tokenId">
+                            Approve
+                        </button>
+                    </div>
+                </div>
+
+                <div *ngIf="!ethToMtr">
+                    <div class="flex justify-between gap-3">
+                        <div class="w-2/3 mb-4">
+                            <div class="text-sky-600">Token Address (ETH)</div>
+                            <mat-form-field appearance="outline" class="w-full mb-2">
+                                <input matInput required [(ngModel)]="mtrToEthData.tokenAddress" />
+                            </mat-form-field>
+                        </div>
+                        <div class="w-1/3 mb-4">
+                            <div class="text-sky-600">Token ID</div>
+                            <mat-form-field appearance="outline" class="w-full mb-2">
+                                <input matInput required [(ngModel)]="mtrToEthData.tokenId" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <button mat-flat-button class="w-32 h-12 btn-warn-filled" (click)="burn()"
+                            [disabled]="!mtrToEthData.tokenAddress || !mtrToEthData.tokenId">
+                            Burn
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

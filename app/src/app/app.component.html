@@ -1,0 +1,41 @@
+<header class="flex justify-center">
+  <div class="w-2/3 h-20 flex items-center justify-between py-2">
+    <!-- top navigation -->
+    <div class="flex items-center justify-start gap-2">
+      <a [routerLink]="['/']"><img class="h-12 mr-4" src="/assets/images/meter-logo-d.svg" /></a>
+
+      <a [routerLink]="['/minter']" [class.active-link]="isActiveMinter"
+        class=" w-28 h-9 flex items-center justify-center text-sm
+          border-1 border-slate-300 rounded-3xl cursor-pointer  hover:bg-sky-600 hover:border-sky-600 hover:text-white">
+        <i class="material-icons mr-1">save_alt</i>
+        <span class="w-12">Minter</span>
+      </a>
+
+      <a [routerLink]="['/bridge']" routerLinkActive="active-link" class="w-28 h-9 flex items-center justify-center text-sm
+      border-1 border-slate-300 rounded-3xl cursor-pointer  hover:bg-sky-600 hover:border-sky-600 hover:text-white">
+        <i class="material-icons mr-1">settings_ethernet</i>
+        <span class="w-12">Bridge</span>
+      </a>
+      <a [routerLink]="['/account']" routerLinkActive="active-link" class="w-28 h-9 flex items-center justify-center text-sm
+    border-1 border-slate-300 rounded-3xl cursor-pointer  hover:bg-sky-600 hover:border-sky-600 hover:text-white">
+        <i class="material-icons mr-1">account_circle</i>
+        <span class="w-12">Account</span>
+      </a>
+    </div>
+    <!-- wallet -->
+    <div>
+      <app-wallet></app-wallet>
+    </div>
+  </div>
+</header>
+
+<router-outlet></router-outlet>
+
+<footer class="fixed bottom-0 w-full h-20 bg-slate-800 border-t-8 border-sky-600 flex items-start justify-center">
+  <div class="w-2/3 py-4 text-white ">
+    <div class="flex items-center justify-between gap-10">
+      <img src="/assets/images/meter-logo.svg" class="h-10" />
+      <div class="text-xs">©2022 Meter Ethereum Hackathon.</div>
+    </div>
+  </div>
+</footer>

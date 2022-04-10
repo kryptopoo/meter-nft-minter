@@ -1,0 +1,35 @@
+{
+    "name": "meter-nft-minter-contracts",
+    "version": "0.1.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kryptopoo/meter-nft-minter.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "engines": {
+        "node": "14.x"
+    },
+    "bugs": {
+        "url": "https://github.com/kryptopoo/meter-nft-minter/issues"
+    },
+    "homepage": "https://github.com/kryptopoo/meter-nft-minter#readme",
+    "dependencies": {
+        "@openzeppelin/contracts": "^4.5.0",
+        "@truffle/hdwallet-provider": "^2.0.4",
+        "fs": "0.0.1-security",
+        "i": "^0.3.7",
+        "npm": "^8.6.0",
+        "path": "^0.12.7",
+        "solc": "^0.8.13",
+        "web3": "^1.7.1"
+    },
+    "devDependencies": {
+        "typescript": "^4.5.4"
+    }
+}

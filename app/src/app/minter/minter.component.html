@@ -1,0 +1,110 @@
+<div class="h-40 flex justify-center bg-sky-600">
+    <div class="w-2/3 text-white my-4">
+        <div class="text-4xl">NFT Minter</div>
+        <div class="text-xs opacity-60">Mint NFT on Meter with no-code</div>
+    </div>
+</div>
+
+<div class="flex justify-center relative -top-16 min-h-[30rem]">
+    <div class="w-2/3">
+        <div class="h-16 bg-slate-50 border-t-1 border-l-1 border-r-1 rounded-t-2xl flex items-center justify-between">
+            <div class="px-4 text-xl font-medium">Mint your NFT</div>
+            <div class="w-64 flex items-center justify-between  gap-2 mr-6">
+                <div class="bg-slate-50 text-black w-1/2 h-10 rounded cursor-pointer flex items-center justify-center"
+                    [class.active-button]="ercType == 'ERC1155'" (click)="ercType = 'ERC1155'">ERC1155</div>
+                <div class="bg-slate-50 text-black w-1/2 h-10 rounded cursor-pointer flex items-center justify-center"
+                    [class.active-button]="ercType == 'ERC721'" (click)="ercType = 'ERC721'">ERC721</div>
+            </div>
+        </div>
+        <div
+            class="border-b-1 border-l-1 border-r-1 rounded-b-2xl shadow-md p-6 flex items-start justify-between gap-6">
+            <div class="w-1/2">
+                <div class="text-sky-600">Upload</div>
+                <div class="h-full mt-1 rounded border-dashed border-2 flex flex-col items-center justify-center">
+                    <div><img class="max-w-sm" [src]="imageFileData" /></div>
+
+                    <div class="text-center text-sm opacity-75 h-52 flex flex-col items-center justify-center"
+                        *ngIf="imageFileData == null">
+                        <div><a (click)="uploadFile.click()" class="underline cursor-pointer mb-6 block">Browse file</a>
+                        </div>
+                        <div>Supports JPG, GIF, PNG and MP4 videos. Max file size : 10MB.</div>
+                        <input #uploadFile type="file" accept="image/*" style="display: none"
+                            (change)="onUploadFileChanged($event)" />
+                    </div>
+
+                </div>
+
+                <div id="accordion-collapse" data-accordion="collapse" class="mt-4">
+                    <h2 id="accordion-collapse-heading-3">
+                        <button type="button"
+                            class="flex justify-between items-center p-5 w-full text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                            data-accordion-target="#accordion-collapse-body-3" aria-expanded="false"
+                            aria-controls="accordion-collapse-body-3">
+                            <span class="text-base">Metadata</span>
+                            <i class="material-icons">add</i>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
+                        <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                            <div class="metadata flex items-start justify-start gap-2"
+                                *ngFor="let attr of nftData.attributes; let i = index">
+                                <mat-form-field appearance="outline" class="w-5/12">
+                                    <input placeholder="name" matInput required [(ngModel)]="attr.trait_type" />
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-5/12">
+                                    <input placeholder="value" matInput required [(ngModel)]="attr.value" />
+                                </mat-form-field>
+                                <div class="mt-2">
+                                    <button mat-icon-button (click)="removeMetadata(i)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <button mat-stroked-button color="basic" class="w-40" (click)="addMetadata()">
+                                    <mat-icon class="inline-block">add</mat-icon>
+                                    Add metadata
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="w-1/2">
+                <div class="mb-4">
+                    <div class="text-sky-600">Title</div>
+                    <mat-form-field appearance="outline" class="w-full">
+                        <input matInput required [(ngModel)]="nftData.name" />
+                    </mat-form-field>
+                </div>
+                <div class="mb-4">
+                    <div class="text-sky-600">Description</div>
+                    <mat-form-field appearance="outline" class="w-full">
+                        <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="4" cdkAutosizeMaxRows="5"
+                            [(ngModel)]="nftData.description"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="mb-6 text-xs opacity-50">
+                    <div class="my-2"> Once your NFT is minted on the Meter blockchain, you will not be able to edit
+                        or update any
+                        of its information.</div>
+                    <div>You agree that any information uploaded to the Meter's NFT Minter will not contain material
+                        subject to copyright or other proprietary rights, unless you have necessary permission or are
+                        otherwise legally entitled to post the material.</div>
+                </div>
+                <div class="mb-4">
+                    <button  *ngIf="isWalletConnected" mat-flat-button [disabled]="!nftData.name || !imageFile" class="w-32 h-10 btn-primary-filled" (click)="mint()">
+                        Mint NFT
+                    </button>
+                    <button  *ngIf="!isWalletConnected" mat-flat-button disabled class="w-44 h-10 btn-primary-filled" (click)="mint()">
+                        Wallet Not Connected
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

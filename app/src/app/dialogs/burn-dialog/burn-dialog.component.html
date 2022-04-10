@@ -1,0 +1,31 @@
+<div class="w-full">
+    <div class="flex items-start justify-between mb-2">
+        <div class="text-xl">Transfer</div>
+        <div mat-dialog-close class="flex items-center justify-center w-8 h-8 cursor-pointer text-center">
+            <i class="material-icons w-8 h-8">close</i>
+        </div>
+    </div>
+
+    <div class="">
+        You are about processing to transfer the token from MTR to ETH
+    </div>
+    <div class="">
+        You need to burn the NFT on Meter to withraw the original NFT out the Bridge
+    </div>
+
+    <div class="flex flex-col items-center justify-center my-8">
+        <div class="text-left w-full">
+            <div class="flex items-center flex-col justify-center">
+                <div class="flex items-center justify-center gap-3">
+                    <app-nft-card [address]="data.address" [tokenId]="data.tokenId"></app-nft-card>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--actions-->
+    <div class="flex items-center justify-center gap-3 mt-8">
+        <button class="w-28 h-10 btn-warn-filled" (click)="burn()">Burn</button>
+        <button class="w-28 h-10 btn-basic" mat-dialog-close>Cancel</button>
+    </div>
+</div>
