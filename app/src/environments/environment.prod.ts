@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://meter-nft-minter-api.herokuapp.com/',
+    apiUrl: 'https://meter-nft-minter-api.herokuapp.com',
     contracts: {
         BRIDGE: '0x620777774B01b66061a93210aa1251c658d5d2f0'
     },

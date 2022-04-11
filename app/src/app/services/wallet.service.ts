@@ -10,7 +10,7 @@ import { ethers } from 'ethers';
 })
 export class WalletService {
     connection$: Subject<boolean> = new Subject<boolean>();
-    private _address: string;
+    private _address: string = null;
 
     constructor(private _httpClient: HttpClient) {
         // this.web3 = new Web3((window as any).ethereum);
@@ -29,7 +29,7 @@ export class WalletService {
             const accounts = await ethereum.request({ method: 'eth_accounts' });
 
             if (accounts.length > 0) {
-                this._address = accounts[0];
+                this._address = ethers.utils.getAddress(accounts[0]);
                 this.connection$.next(true);
                 return true;
             } else {
@@ -87,7 +87,7 @@ export class WalletService {
     }
 
     async changeNetwork(chainId) {
-        console.log(ethers.utils.hexlify(chainId))
+        console.log(ethers.utils.hexlify(chainId));
         if ((window as any).ethereum) {
             try {
                 await (window as any).ethereum.request({

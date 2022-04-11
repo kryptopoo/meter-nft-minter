@@ -43,7 +43,6 @@ export class BridgeComponent implements OnInit {
     }
 
     async approve() {
-        this.processing = true;
         const nftAddress = this.ethToMtrData.tokenAddress;
         const nftId = this.ethToMtrData.tokenId;
         const receiverAddress = this.ethToMtrData.receiverAddress;
@@ -57,6 +56,7 @@ export class BridgeComponent implements OnInit {
         });
         this.approveDialogRef.afterClosed().subscribe(async (approved) => {
             if (approved) {
+                this.processing = true;
                 (await this._contractService.deposit(nftAddress, Number(nftId), receiverAddress)).subscribe((data: any) => {
                     console.log('deposit res', data);
                     this._toastService
@@ -72,7 +72,6 @@ export class BridgeComponent implements OnInit {
     }
 
     async burn() {
-        this.processing = true;
         const nftAddress = this.mtrToEthData.tokenAddress;
         const nftId = Number(this.mtrToEthData.tokenId);
         const receiverAddress = this._walletService.getAddress();
@@ -86,6 +85,7 @@ export class BridgeComponent implements OnInit {
         });
         this.burnDialogRef.afterClosed().subscribe(async (burned) => {
             if (burned) {
+                this.processing = true;
                 (await this._contractService.burn(receiverAddress, nftAddress, nftId)).subscribe((data: any) => {
                     console.log('burn data', data);
                     this._toastService
