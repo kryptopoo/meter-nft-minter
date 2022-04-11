@@ -30,7 +30,7 @@ export class ApproveDialogComponent implements OnInit {
         console.log('contract', contract);
         const ownerAddress = await contract.ownerOf(Number(this.data.tokenId));
         console.log('ownerAddress', ethers.utils.getAddress(ownerAddress));
-        this.canApprove = (ethers.utils.getAddress(ownerAddress) == this._walletService.getAddress());
+        this.canApprove =  this._walletService.getAddress() != null &&  (ethers.utils.getAddress(ownerAddress) == this._walletService.getAddress());
     }
 
     approve() {

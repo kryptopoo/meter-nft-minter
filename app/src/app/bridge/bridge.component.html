@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <button class="w-32 h-1 btn-warn-filled" (click)="burn()"
+                        <button class="w-32 h-10 btn-warn-filled" (click)="burn()"
                             [disabled]="!mtrToEthData.tokenAddress || !mtrToEthData.tokenId">
                             <mat-spinner class="mr-1" strokeWidth="3" [diameter]="18" *ngIf="processing"></mat-spinner>
                             <span>Burn</span>

@@ -67,12 +67,8 @@ export class WalletService {
     async getNetwork(onNetworkChanged) {
         const provider = new ethers.providers.Web3Provider((window as any).ethereum, 'any');
         var network = await provider.getNetwork();
-        console.log(network);
 
         provider.on('network', (newNetwork, oldNetwork) => {
-            console.log('oldNetwork', oldNetwork);
-            console.log('newNetwork', newNetwork);
-
             if (!newNetwork.name || newNetwork.name == 'unknown') {
                 newNetwork.name = NETWORK[newNetwork.chainId];
             }
@@ -87,7 +83,6 @@ export class WalletService {
     }
 
     async changeNetwork(chainId) {
-        console.log(ethers.utils.hexlify(chainId));
         if ((window as any).ethereum) {
             try {
                 await (window as any).ethereum.request({

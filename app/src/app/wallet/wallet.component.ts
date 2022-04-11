@@ -28,7 +28,6 @@ export class WalletComponent implements OnInit {
         this.shortAddress = `${this.address.substring(0, 6)}...${this.address.substring(this.address.length - 4)}`;
         // this.balance = await this._walletService.getBalance();
         const network = await this._walletService.getNetwork((newNetwork) => {
-            console.log(' network.name', newNetwork.name);
             this.network = newNetwork.name;
         });
         this.network = network.name;

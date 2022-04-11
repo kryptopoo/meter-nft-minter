@@ -18,9 +18,7 @@ export class NftCardComponent implements OnInit {
 
     async ngOnInit() {
         let contract = this._contractService.getNft721Contract(this.address);
-        console.log('contract', contract);
         let tokenURI = await contract.tokenURI(Number(this.tokenId));
-        console.log('tokenURI', tokenURI);
         this._httpClient.get(tokenURI).subscribe((metadata) => {
             console.log('metadata', metadata);
             setTimeout(() => {

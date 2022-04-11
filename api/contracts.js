@@ -38,7 +38,6 @@ const Constracts = {
 const mintNft721 = async (toAddress, metadataUrl) => {
     const accounts = await meterWeb3.eth.getAccounts();
     const fromAddress = accounts[0];
-    console.log('from', fromAddress);
     return Constracts.NFT721.methods.mint(toAddress, metadataUrl).send({
         from: fromAddress,
         gas: '4000000',
@@ -49,16 +48,10 @@ const mintNft721 = async (toAddress, metadataUrl) => {
 const withdrawNft721FromBridge = async (receiverAddress, nftAddress, nftTokenId) => {
     const accounts = await ethWeb3.eth.getAccounts();
     const fromAddress = accounts[0];
-    console.log('fromAddress', fromAddress)
-
     const chainRoute = '3-83'; // ropsten testnet chainid
     const nonce = 8888; // hardcode
     const hash = await Constracts.BRIDGE.methods.hashMessage(receiverAddress, nftAddress, nftTokenId, chainRoute, nonce).call();
-    console.log('hash', hash)
-
     const { v, r, s } = ethWeb3.eth.accounts.sign(hash, privateKey);
-    console.log('{ v, r, s } ', { v, r, s } )
-   
     return Constracts.BRIDGE.methods.withdraw(receiverAddress, nftAddress, nftTokenId, chainRoute, nonce, v, r, s).send({
         from: fromAddress,
         gas: '4000000',

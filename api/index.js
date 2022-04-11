@@ -43,11 +43,8 @@ const mint721 = async (minter, uri) => {
 
     try {
         const txMintReceipt = await getMeterTransactionReceipt(txMint.events.Transfer.transactionHash);
-        console.log('txMintReceipt', txMintReceipt);
         const destNftAddress = toChecksumAddress(txMintReceipt.logs[0].address);
         const destNftId = hexToNumber(txMintReceipt.logs[0].topics[3]);
-        console.log('destNftAddress', destNftAddress);
-        console.log('destNftId', destNftId);
 
         rs = {
             tx: txMint,
@@ -74,8 +71,6 @@ app.get('/config', async function (req, res) {
 
 app.post('/mint', async function (req, res) {
     try {
-        console.log('mint req', req.body);
-
         const { minter, uri, count, type } = req.body;
 
         let mintRs;
@@ -99,28 +94,22 @@ app.post('/withdraw', async function (req, res) {
         tokenId: null,
     }
     try {
-        console.log('withdraw req', req.body);
-
         const { receiverAddress, tokenAddress, tokenId, type } = req.body;
 
         // // get mapping
         // const destNft = burnReceipt // `${nftAddress}:${nftId}`
         const src = Datastore.getMapping(`${toChecksumAddress(tokenAddress)}:${tokenId}`);
-        console.log('src ', src);
 
         if (!src) {
             res.sendStatus(400);
         } else {
             const srcNftAddress = src.split(':')[0];
             const srcNftId = src.split(':')[1];
-            console.log('srcNftAddress', srcNftAddress);
-            console.log('srcNftId', srcNftId);
             rs.address = srcNftAddress;
             rs.tokenId = srcNftId;
 
             if (type === 'ERC721') {
                 rs.tx = await withdrawNft721FromBridge(receiverAddress, srcNftAddress, Number(srcNftId));
-                console.log('withdraw tx', rs.tx );
             } else if (type === 'ERC1155') {
             }
 
@@ -138,13 +127,8 @@ app.post('/deposit', async function (req, res) {
         tx: null
     }
     try {
-        console.log('deposit req', req.body);
-
         const { receiverAddress, tokenAddress, tokenId, type } = req.body;
-
         const uri = await getEthereumTokenURI(tokenAddress, tokenId);
-        console.log('minter', receiverAddress);
-        console.log('uri', uri);
 
         if (type === 'ERC721') {
             rs = await mint721(receiverAddress, uri);
@@ -153,7 +137,7 @@ app.post('/deposit', async function (req, res) {
 
         await Datastore.addMapping(`${toChecksumAddress(rs.address)}:${rs.tokenId}`, `${toChecksumAddress(tokenAddress)}:${tokenId}`);
 
-        console.log('deposit res', `${rs.address}:${rs.tokenId}`);
+        console.log('deposit re', rs);
 
         res.send(rs);
     } catch (e) {
@@ -164,13 +148,9 @@ app.post('/deposit', async function (req, res) {
 
 app.post('/account', async function (req, res) {
     try {
-        console.log('account req', req.body);
-
         const { address } = req.body;
-
         const mintings = await Datastore.getMintings(address);
 
-        console.log('account res', mintings);
         res.send(mintings);
     } catch (e) {
         console.log(e);

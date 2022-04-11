@@ -58,7 +58,7 @@ export class BridgeComponent implements OnInit {
             if (approved) {
                 this.processing = true;
                 (await this._contractService.deposit(nftAddress, Number(nftId), receiverAddress)).subscribe((data: any) => {
-                    console.log('deposit res', data);
+                    console.log('deposit', data);
                     this._toastService
                         .success(`Transfer token successfully`, 'view')
                         .onAction()
@@ -87,7 +87,7 @@ export class BridgeComponent implements OnInit {
             if (burned) {
                 this.processing = true;
                 (await this._contractService.burn(receiverAddress, nftAddress, nftId)).subscribe((data: any) => {
-                    console.log('burn data', data);
+                    console.log('burn', data);
                     this._toastService
                         .success(`Transfer token successfully`, 'view')
                         .onAction()

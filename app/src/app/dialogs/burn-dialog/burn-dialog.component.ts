@@ -30,7 +30,7 @@ export class BurnDialogComponent implements OnInit {
         console.log('contract', contract);
         const ownerAddress = await contract.ownerOf(Number(this.data.tokenId));
         console.log('ownerAddress', ethers.utils.getAddress(ownerAddress));
-        this.canBurn = (ethers.utils.getAddress(ownerAddress)  == this._walletService.getAddress());
+        this.canBurn = this._walletService.getAddress() != null && (ethers.utils.getAddress(ownerAddress)  == this._walletService.getAddress());
     }
 
     burn() {

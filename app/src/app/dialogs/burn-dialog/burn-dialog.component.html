@@ -25,7 +25,7 @@
 
     <!--actions-->
     <div class="flex items-center justify-center gap-3 mt-8">
-        <button class="w-28 h-10 btn-warn-filled" (click)="burn()">Burn</button>
+        <button class="w-28 h-10 btn-warn-filled" (click)="burn()" [disabled]="!canBurn">Burn</button>
         <button class="w-28 h-10 btn-basic" mat-dialog-close>Cancel</button>
     </div>
 </div>

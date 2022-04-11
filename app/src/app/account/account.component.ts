@@ -27,14 +27,7 @@ export class AccountComponent implements OnInit {
     loadMyMintings(chainId) {
         if (chainId == CHAIN_ID.MeterTestnet) {
             this._walletService.getMyMintings().subscribe((data) => {
-                console.log('data', data);
-
                 (data as Array<any>).forEach(async (nft) => {
-                    let contract = this._contractService.getNft721Contract(nft.nftAddress);
-                    console.log('contract', contract);
-                    let tokenURI = await contract.tokenURI(Number(nft.nftId));
-                    console.log('tokenURI', tokenURI);
-
                     this.nftItems.push({ address: nft.nftAddress, tokenId: nft.nftId });
                 });
             });

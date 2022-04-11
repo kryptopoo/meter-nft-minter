@@ -51,7 +51,6 @@ export class MinterComponent implements OnInit {
 
     async mint() {
         this.processing = true;
-        console.log(this.nftData, this.imageFile);
         (await this._contractService.mintNft721(this.nftData, this.imageFile)).subscribe((data: any) => {
             console.log('minted', data);
 
