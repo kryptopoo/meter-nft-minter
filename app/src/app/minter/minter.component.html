@@ -21,7 +21,7 @@
             <div class="w-1/2">
                 <div class="text-sky-600">Upload</div>
                 <div class="h-full mt-1 rounded border-dashed border-2 flex flex-col items-center justify-center">
-                    <div><img class="max-w-sm" [src]="imageFileData" /></div>
+                    <div><img class="max-h-80" [src]="imageFileData" /></div>
 
                     <div class="text-center text-sm opacity-75 h-52 flex flex-col items-center justify-center"
                         *ngIf="imageFileData == null">
@@ -34,10 +34,11 @@
 
                 </div>
 
+
                 <div id="accordion-collapse" data-accordion="collapse" class="mt-4">
                     <h2 id="accordion-collapse-heading-3">
                         <button type="button"
-                            class="flex justify-between items-center p-5 w-full text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                            class="flex justify-between items-center p-5 w-full text-left text-gray-500 border border-gray-200 focus:ring-1 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                             data-accordion-target="#accordion-collapse-body-3" aria-expanded="false"
                             aria-controls="accordion-collapse-body-3">
                             <span class="text-base">Metadata</span>
@@ -96,8 +97,9 @@
                         otherwise legally entitled to post the material.</div>
                 </div>
                 <div class="mb-4">
-                    <button  *ngIf="isWalletConnected" mat-flat-button [disabled]="!nftData.name || !imageFile" class="w-32 h-10 btn-primary-filled" (click)="mint()">
-                        Mint NFT
+                    <button  *ngIf="isWalletConnected" [disabled]="!nftData.name || !imageFile" class="w-32 h-10 btn-primary-filled" (click)="mint()">
+                        <mat-spinner class="mr-1" strokeWidth="3" [diameter]="18" *ngIf="processing"></mat-spinner>
+                        <span>Mint NFT</span>
                     </button>
                     <button  *ngIf="!isWalletConnected" mat-flat-button disabled class="w-44 h-10 btn-primary-filled" (click)="mint()">
                         Wallet Not Connected

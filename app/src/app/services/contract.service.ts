@@ -41,9 +41,7 @@ export class ContractService {
         this._storageClient = new Web3Storage({
             token: environment.web3StorageToken
         });
-
-        const config = JSON.parse(sessionStorage.getItem('MeterNftMinter.config'));
-        this._bridgeAddress = config.contracts.BRIDGE;
+        this._bridgeAddress = environment.contracts.BRIDGE;
     }
 
     // Meter mint NFT
@@ -100,14 +98,6 @@ export class ContractService {
     getBridgeContract() {
         return new Contract(this._bridgeAddress, Bridge721.abi, this.getSigner());
     }
-
-    //   async getMetadata(nftAddress: string, nftId: number) {
-    //     let contract = this.getNft721Contract(nftAddress);
-    //     console.log("contract", contract);
-    //     let tokenURI = await contract.tokenURI(nftId);
-    //     console.log("tokenURI", tokenURI);
-    //     return this._httpClient.get(tokenURI);
-    //   }
 
     // Ethereum approve nft
     async approve(nftAddress: string, nftTokenId: number) {

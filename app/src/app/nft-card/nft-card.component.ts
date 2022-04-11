@@ -1,3 +1,4 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ContractService } from '../services/contract.service';
@@ -13,7 +14,7 @@ export class NftCardComponent implements OnInit {
 
     metadata: any;
 
-    constructor(private _contractService: ContractService, private _httpClient: HttpClient) {}
+    constructor(private _contractService: ContractService, private _httpClient: HttpClient, private _clipboard: Clipboard) {}
 
     async ngOnInit() {
         let contract = this._contractService.getNft721Contract(this.address);
@@ -30,5 +31,9 @@ export class NftCardComponent implements OnInit {
 
     shortAddress(address: string) {
         return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+    }
+
+    copy(value){
+        this._clipboard.copy(value);
     }
 }

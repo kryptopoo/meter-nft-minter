@@ -11,7 +11,7 @@ export class ToastService {
         return this._snackBar.open(message, action, {
             horizontalPosition: 'right',
             verticalPosition: 'top',
-            duration: 5000,
+            duration: 10000,
             panelClass: ['snackbar-success']
         });
     }

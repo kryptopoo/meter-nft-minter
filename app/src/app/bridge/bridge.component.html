@@ -75,9 +75,10 @@
                         </div>
                     </div>
                     <div class="mb-2">
-                        <button mat-flat-button class="w-32 h-12 btn-primary-filled" (click)="approve()"
+                        <button class="w-32 h-12 btn-primary-filled" (click)="approve()"
                             [disabled]="!ethToMtrData.tokenAddress || !ethToMtrData.receiverAddress || !ethToMtrData.tokenId">
-                            Approve
+                            <mat-spinner class="mr-1" strokeWidth="3" [diameter]="18" *ngIf="processing"></mat-spinner>
+                            <span>Approve</span>
                         </button>
                     </div>
                 </div>
@@ -98,9 +99,10 @@
                         </div>
                     </div>
                     <div class="mb-4">
-                        <button mat-flat-button class="w-32 h-12 btn-warn-filled" (click)="burn()"
+                        <button class="w-32 h-12 btn-warn-filled" (click)="burn()"
                             [disabled]="!mtrToEthData.tokenAddress || !mtrToEthData.tokenId">
-                            Burn
+                            <mat-spinner class="mr-1" strokeWidth="3" [diameter]="18" *ngIf="processing"></mat-spinner>
+                            <span>Burn</span>
                         </button>
                     </div>
                 </div>

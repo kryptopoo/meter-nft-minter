@@ -30,25 +30,12 @@ app.get('/', (req, res) => {
     res.send('Meter Minter Api running...');
 });
 
-// app.get('/contracts/MeterNft721', (req, res) => {
-//     const contractFilePath = path.resolve(__dirname, 'contracts', 'MeterNft721.json');
-//     const contractFileJson = fs.readFileSync(contractFilePath, 'UTF-8');
-
-//     res.send(contractFileJson);
-// });
-
-// app.get('/contracts', (req, res) => {
-//     res.send({
-//         meterNft721: '0x8a9b15012E28bF022702A01D4032858b420E862d',
-//         meterNft1155: '0x0'
-//     });
-// });
-
 const mint721 = async (minter, uri) => {
     let rs = {
         tx: null,
         address: null,
-        tokenId: null
+        tokenId: null,
+        tokenURI: null,
     };
 
     const txMint = await mintNft721(minter, uri);
@@ -65,7 +52,8 @@ const mint721 = async (minter, uri) => {
         rs = {
             tx: txMint,
             address: destNftAddress,
-            tokenId: destNftId
+            tokenId: destNftId,
+            tokenURI: uri
         };
 
         await Datastore.addMinting(minter, destNftAddress, destNftId);
@@ -106,7 +94,9 @@ app.post('/mint', async function (req, res) {
 
 app.post('/withdraw', async function (req, res) {
     let rs = {
-        tx: null
+        tx: null,
+        address: null,
+        tokenId: null,
     }
     try {
         console.log('withdraw req', req.body);
@@ -123,15 +113,11 @@ app.post('/withdraw', async function (req, res) {
         } else {
             const srcNftAddress = src.split(':')[0];
             const srcNftId = src.split(':')[1];
-            // const srcHash = src.split(':')[2];
             console.log('srcNftAddress', srcNftAddress);
             console.log('srcNftId', srcNftId);
-            // console.log('srcHash', srcHash);
+            rs.address = srcNftAddress;
+            rs.tokenId = srcNftId;
 
-            // const srcNftAddress = '0x6563A2F98A9452d9693A013c0D0531747b5B46ee';
-            // const srcNftId = 1;
-
-      
             if (type === 'ERC721') {
                 rs.tx = await withdrawNft721FromBridge(receiverAddress, srcNftAddress, Number(srcNftId));
                 console.log('withdraw tx', rs.tx );
@@ -156,23 +142,18 @@ app.post('/deposit', async function (req, res) {
 
         const { receiverAddress, tokenAddress, tokenId, type } = req.body;
 
-        // // get sender address
-        // const txReceipt = await getEthereumTransactionReceipt(txHash);
-        // console.log('txReceipt', txReceipt);
-
-        // const minter = receiverAddress
         const uri = await getEthereumTokenURI(tokenAddress, tokenId);
         console.log('minter', receiverAddress);
         console.log('uri', uri);
 
         if (type === 'ERC721') {
-            rs.tx = await mint721(receiverAddress, uri);
+            rs = await mint721(receiverAddress, uri);
         } else if (type === 'ERC1155') {
         }
 
-        await Datastore.addMapping(`${toChecksumAddress(rs.tx.address)}:${rs.tx.tokenId}`, `${toChecksumAddress(tokenAddress)}:${tokenId}`);
+        await Datastore.addMapping(`${toChecksumAddress(rs.address)}:${rs.tokenId}`, `${toChecksumAddress(tokenAddress)}:${tokenId}`);
 
-        console.log('deposit res', `${rs.tx.address}:${rs.tx.tokenId}`);
+        console.log('deposit res', `${rs.address}:${rs.tokenId}`);
 
         res.send(rs);
     } catch (e) {

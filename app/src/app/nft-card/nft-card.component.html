@@ -2,7 +2,7 @@
     <img [src]="metadata.image" class="h-40 w-full mb-1" />
     <div class="text-left  mb-1">{{ metadata.name }}</div>
     <div class="flex justify-between">
-        <div class="text-sm">{{shortAddress(address)}}</div>
+        <button class="text-sm hover:underline" [cdkCopyToClipboard]="address" >{{shortAddress(address)}}</button>
         <div class="text-sm">#{{tokenId}}</div>
     </div>
 </div>

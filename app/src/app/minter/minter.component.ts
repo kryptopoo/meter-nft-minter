@@ -20,6 +20,8 @@ export class MinterComponent implements OnInit {
     imageFileData: string = null;
     ercType: string = 'ERC721';
 
+    processing: boolean = false;
+
     isWalletConnected: boolean = false;
 
     constructor(private _walletService: WalletService, private _contractService: ContractService, private _dialog: MatDialog) {}
@@ -40,6 +42,7 @@ export class MinterComponent implements OnInit {
     }
 
     async mint() {
+        this.processing = true;
         console.log(this.nftData, this.imageFile);
         (await this._contractService.mintNft721(this.nftData, this.imageFile)).subscribe((data: any) => {
             console.log('minted', data);
@@ -48,10 +51,13 @@ export class MinterComponent implements OnInit {
                 data: {
                     tokenAddress: data.address,
                     tokenId: data.tokenId,
-                    tx: data.tx
+                    tx: data.tx,
+                    tokenURI: data.tokenURI
                 },
                 disableClose: true
             });
+
+            this.processing = false;
         });
     }
 

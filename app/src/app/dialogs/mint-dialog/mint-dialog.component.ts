@@ -4,6 +4,7 @@ export interface MintDialogData {
     tokenAddress: string;
     tokenId: number;
     tx?: any;
+    tokenURI: string;
 }
 @Component({
     selector: 'app-mint-dialog',

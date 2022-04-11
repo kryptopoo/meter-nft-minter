@@ -62,13 +62,26 @@ body {
 }
 
 .btn-primary-filled {
-    @apply border border-slate-800 rounded bg-slate-800 text-white hover:bg-opacity-90 hover:cursor-pointer;
+    @apply border border-slate-800 rounded bg-slate-800 text-white hover:bg-opacity-90 hover:cursor-pointer flex items-center justify-center;
 }
 
 .btn-warn-filled {
     @apply border border-red-600 rounded bg-red-700 text-white hover:bg-opacity-90 hover:cursor-pointer;
 }
 
+button:disabled,
+button[disabled]{
+  background-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.26);
+  border: none;
+}
+
 .snackbar-success, .snackbar-error {
     margin-top: 4.5rem !important;
+    background-color: rgb(30 41 59) !important;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: rgb(2 132 199);
+    margin-top: -1px;
 }

@@ -46,17 +46,6 @@ const mintNft721 = async (toAddress, metadataUrl) => {
     });
 };
 
-// const burnNft721 = async (nftAddress, nftTokenId) => {
-//     const accounts = await meterWeb3.eth.getAccounts();
-//     const fromAddress = accounts[0];
-//     console.log('from', fromAddress)
-//     return Constracts.NFT721.methods.burn(nftAddress, nftTokenId).send({
-//         from: fromAddress,
-//         gas: '4000000',
-//         gasPrice: '20000000000'
-//     });
-// }
-
 const withdrawNft721FromBridge = async (receiverAddress, nftAddress, nftTokenId) => {
     const accounts = await ethWeb3.eth.getAccounts();
     const fromAddress = accounts[0];
@@ -108,16 +97,3 @@ module.exports = {
     hexToNumber: hexToNumber,
     toChecksumAddress: toChecksumAddress
 };
-
-// test = async () => {
-//     const accounts = await ethWeb3.eth.getAccounts();
-//     const fromAddress = accounts[0];
-//     var signature = ethWeb3.eth.accounts.sign('0x0f14c070448f64d322fc9b13effe9ed4dd32da29ace26edeefab58deae484aae', privateKey);
-//     console.log( 'signature: ', signature);
-
-//     // var hash = '0x8e886b4721373380fc194bdd50024087329bfb550cfc09886f4ecbcac09702e7'
-//     // var tx = await getMeterTransactionReceipt(hash)
-//     // console.log(tx)
-// }
-
-// test()

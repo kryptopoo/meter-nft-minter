@@ -77,11 +77,3 @@ class Datastore {
 module.exports = {
     Datastore: Datastore
 };
-
-// test = async () => {
-//     await Datastore.initOrbitDB()
-//     console.log('all mintings', Datastore.mintingStore.get(''));
-// }
-
-// test()
-

@@ -1,6 +1,7 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,27 +41,13 @@ import { tap } from 'rxjs/operators';
 
 // function initializeAppFactory(httpClient: HttpClient): () => Observable<any> {
 //     return () =>
-//         httpClient.get(environment.apiUrl + '/config').subscribe(
-//             (res) => {
+//         httpClient.get(environment.apiUrl + '/config').pipe(
+//             tap((res) => {
 //                 console.log('load config from node env', res);
 //                 sessionStorage.setItem('MeterNftMinter.config', JSON.stringify(res));
-//             },
-//             (error) => {
-//                 console.log('load config from angular env', environment);
-//                 // sessionStorage.setItem('MeterNftMinter.config', JSON.stringify(environment));
-//             }
+//             })
 //         );
 // }
-
-function initializeAppFactory(httpClient: HttpClient): () => Observable<any> {
-    return () =>
-        httpClient.get(environment.apiUrl + '/config').pipe(
-            tap((res) => {
-                console.log('load config from node env', res);
-                sessionStorage.setItem('MeterNftMinter.config', JSON.stringify(res));
-            })
-        );
-}
 
 @NgModule({
     declarations: [
@@ -78,6 +65,7 @@ function initializeAppFactory(httpClient: HttpClient): () => Observable<any> {
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
+        ClipboardModule,
 
         MatButtonModule,
         MatListModule,
@@ -100,13 +88,14 @@ function initializeAppFactory(httpClient: HttpClient): () => Observable<any> {
         BrowserAnimationsModule
     ],
     providers: [
-        WalletService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initializeAppFactory,
-            deps: [HttpClient],
-            multi: true
-        }
+        WalletService
+        // ContractService,
+        // {
+        //     provide: APP_INITIALIZER,
+        //     useFactory: initializeAppFactory,
+        //     deps: [HttpClient],
+        //     multi: true
+        // }
     ],
     bootstrap: [AppComponent]
 })

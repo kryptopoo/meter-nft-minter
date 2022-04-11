@@ -29,6 +29,8 @@ export class BridgeComponent implements OnInit {
         tokenId: ''
     };
 
+    processing: boolean = false;
+
     constructor(
         private _contractService: ContractService,
         private _walletService: WalletService,
@@ -41,6 +43,7 @@ export class BridgeComponent implements OnInit {
     }
 
     async approve() {
+        this.processing = true;
         const nftAddress = this.ethToMtrData.tokenAddress;
         const nftId = this.ethToMtrData.tokenId;
         const receiverAddress = this.ethToMtrData.receiverAddress;
@@ -62,12 +65,14 @@ export class BridgeComponent implements OnInit {
                         .subscribe(() => {
                             window.open(`https://scan-warringstakes.meter.io/tx/${data.tx.transactionHash}`);
                         });
+                    this.processing = false;
                 });
             }
         });
     }
 
     async burn() {
+        this.processing = true;
         const nftAddress = this.mtrToEthData.tokenAddress;
         const nftId = Number(this.mtrToEthData.tokenId);
         const receiverAddress = this._walletService.getAddress();
@@ -87,8 +92,9 @@ export class BridgeComponent implements OnInit {
                         .success(`Transfer token successfully`, 'view')
                         .onAction()
                         .subscribe(() => {
-                            window.open(`https://scan-warringstakes.meter.io/tx/${data.tx.transactionHash}`);
+                            window.open(`https://ropsten.etherscan.io/tx/${data.tx.transactionHash}`);
                         });
+                    this.processing = false;
                 });
             }
         });
