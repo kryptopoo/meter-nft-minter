@@ -66,3 +66,6 @@ ng serve.js
 `Ethereum Testnet Bridge` 0x620777774B01b66061a93210aa1251c658d5d2f0
 
 `Meter Testnet NFT721` 0x7B61c90AB3E43f47596B62BA5EcB639Ec387c6c7
+
+## License
+Meter NFT Minter is [MIT licensed](https://raw.githubusercontent.com/kryptopoo/meter-nft-minter/master/LICENSE)
