@@ -1,6 +1,18 @@
 # Meter NFT Minter
 Meter NFT Minter lets you create NFTs easily without code. It's also a trustless two-way transaction channel between Meter and Ethereum by the cross-chain bridge, users can transfer NFTs from other networks to Meter and vice versa.
 
+### How does the Bridge work
+1. Transfer token Ethereum => Meter
+
+    <img src="https://user-images.githubusercontent.com/44108463/162940609-094c6d02-132b-4be3-8460-12db058f13c3.png" width="800" />
+
+
+
+2. Transfer token Meter => Ethereum
+
+    <img src="https://user-images.githubusercontent.com/44108463/162940606-3b86ed21-d3cf-4752-8d6a-43e9d93678da.png" width="800"/>
+
+
 ### Video Demo
 [![Meter NFT Minter Demo](https://img.youtube.com/vi/wP500e8NWaw/0.jpg)](https://www.youtube.com/watch?v=wP500e8NWaw)
 
