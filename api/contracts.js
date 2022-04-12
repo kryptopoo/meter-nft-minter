@@ -1,18 +1,17 @@
 const Web3 = require('web3');
 const ethers = require('ethers');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-
-// address:     0x0A3a5B133B845b43103e8347fFFD1F9baF4eC4A1
-const privateKey = 'c2a2bdd5b50c54ecc872f4150e336a03c2630a426f9a1bec69caf8444e524504';
+const dotenv = require('dotenv');
+dotenv.config();
 
 const Providers = {
     ethereum: new HDWalletProvider({
-        privateKeys: [privateKey],
-        providerOrUrl: 'https://ropsten.infura.io/v3/ec65f5a732a44dce9358710ecf0ef5fe'
+        privateKeys: [process.env.ETHEREUM_PRIVATE_KEY_VALIDATOR],
+        providerOrUrl: process.env.ETHEREUM_PROVIDER_URL
     }),
     meter: new HDWalletProvider({
-        privateKeys: [privateKey],
-        providerOrUrl: 'https://rpctest.meter.io'
+        privateKeys: [process.env.METER_PRIVATE_KEY_DEPLOYER],
+        providerOrUrl: process.env.METER_PROVIDER_URL
     })
 };
 
@@ -24,8 +23,8 @@ const Nft721Json = require('./contracts/artifacts/MeterNft721.json');
 const Bridge721Json = require('./contracts/artifacts/Bridge721.json');
 
 const ContractAddresses = {
-    NFT721: '0x7B61c90AB3E43f47596B62BA5EcB639Ec387c6c7',
-    BRIDGE: '0x620777774B01b66061a93210aa1251c658d5d2f0'
+    NFT721: process.env.METER_CONTRACT_NFT721,
+    BRIDGE:  process.env.ETHEREUM_CONTRACT_BRIDGE
 }
 
 const Constracts = {
@@ -40,8 +39,8 @@ const mintNft721 = async (toAddress, metadataUrl) => {
     const fromAddress = accounts[0];
     return Constracts.NFT721.methods.mint(toAddress, metadataUrl).send({
         from: fromAddress,
-        gas: '4000000',
-        gasPrice: '20000000000'
+        gas: process.env.METER_GAS,
+        gasPrice: process.env.METER_GAS_PRICE
     });
 };
 
@@ -54,8 +53,8 @@ const withdrawNft721FromBridge = async (receiverAddress, nftAddress, nftTokenId)
     const { v, r, s } = ethWeb3.eth.accounts.sign(hash, privateKey);
     return Constracts.BRIDGE.methods.withdraw(receiverAddress, nftAddress, nftTokenId, chainRoute, nonce, v, r, s).send({
         from: fromAddress,
-        gas: '4000000',
-        gasPrice: '20000000000'
+        gas: process.env.ETHEREUM_GAS,
+        gasPrice: process.env.ETHEREUM_GAS_PRICE
     });
 };
 

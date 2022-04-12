@@ -27,9 +27,7 @@ export class BurnDialogComponent implements OnInit {
 
     async ngOnInit() {
         const contract = this._contractService.getNft721Contract(this.data.address);
-        console.log('contract', contract);
         const ownerAddress = await contract.ownerOf(Number(this.data.tokenId));
-        console.log('ownerAddress', ethers.utils.getAddress(ownerAddress));
         this.canBurn = this._walletService.getAddress() != null && (ethers.utils.getAddress(ownerAddress)  == this._walletService.getAddress());
     }
 
