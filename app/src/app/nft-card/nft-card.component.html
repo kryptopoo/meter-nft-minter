@@ -1,5 +1,5 @@
 <div class="w-full h-full p-3 border rounded-md shadow-md hover:border-slate-700 hover:cursor-pointer" *ngIf="metadata">
-    <img [src]="metadata.image" class="h-40 w-full mb-1" />
+    <img [src]="metadata.image" class="h-40 w-40 mb-1" />
     <div class="text-left  mb-1">{{ metadata.name }}</div>
     <div class="flex justify-between">
         <button class="text-sm hover:underline" [cdkCopyToClipboard]="address" >{{shortAddress(address)}}</button>

@@ -21,17 +21,17 @@
             <div class="w-1/2">
                 <div class="text-sky-600">Upload</div>
                 <div class="h-full mt-1 rounded border-dashed border-2 flex flex-col items-center justify-center">
-                    <div><img class="max-h-80" [src]="imageFileData" /></div>
+                    <div><img class="max-h-80" [src]="imageFileData"  (click)="uploadFile.click()" /></div>
 
                     <div class="text-center text-sm opacity-75 h-52 flex flex-col items-center justify-center"
                         *ngIf="imageFileData == null">
                         <div><a (click)="uploadFile.click()" class="underline cursor-pointer mb-6 block">Browse file</a>
                         </div>
                         <div>Supports JPG, GIF, PNG and MP4 videos. Max file size : 10MB.</div>
-                        <input #uploadFile type="file" accept="image/*" style="display: none"
-                            (change)="onUploadFileChanged($event)" />
                     </div>
-
+                    
+                    <input #uploadFile type="file" accept="image/*" style="display: none"
+                    (change)="onUploadFileChanged($event)" />
                 </div>
 
 

@@ -42,11 +42,10 @@ export class MinterComponent implements OnInit {
     }
 
     async checkWalletConnection() {
-        const connected = this._walletService.getAddress() != null;
         const network = await this._walletService.getNetwork((networkChanged) => {
-            this.isWalletConnected = connected && networkChanged.chainId == CHAIN_ID.MeterTestnet;
+            this.isWalletConnected = this._walletService.getAddress() != null && networkChanged.chainId == CHAIN_ID.MeterTestnet;
         });
-        this.isWalletConnected = connected && network.chainId == CHAIN_ID.MeterTestnet;
+        this.isWalletConnected = this._walletService.getAddress() != null && network.chainId == CHAIN_ID.MeterTestnet;
     }
 
     async mint() {
