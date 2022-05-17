@@ -69,3 +69,15 @@ ng serve.js
 
 ## License
 Meter NFT Minter is [MIT licensed](https://raw.githubusercontent.com/kryptopoo/meter-nft-minter/master/LICENSE)
+
+## Development Plan
+| Milestone     | Development features            |  Finished   | 
+|---------------|---------------------------------|-------------|
+| MVP version   |  - ERC721 standard minting  <br>- Bridge Ethereum <-> Meter <br>- Basic Mediator (Relay server)| :white_check_mark: |
+| UI/UX Improvement   | - Mobile responsive <br>- UX/Animation  | :white_large_square: |
+| Advanced Mediator   | - Cross-Chain Message Protocol     | :white_large_square: |
+| Operation Fee   | - Donate minter <br>- Cross-chain transfering NFTs fee    | :white_large_square: |
+| Security Audit   |  - Audit Bridge contracts                               | :white_large_square: |
+| Mainnet Golive  |                                 | :white_large_square: |
+| NFT standards support | - ERC1155 standard minting |:white_large_square: |
+| EVM compatible support | - Bridges between Meter and other EVM compatible networks (Polygon, BSC...) |:white_large_square: |
